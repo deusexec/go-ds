@@ -1,8 +1,6 @@
 package stack
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestStackPush(t *testing.T) {
 	var stack Stack
