@@ -6,7 +6,7 @@ var (
 	ErrorQueueIsEmpty = errors.New("Queue is empty")
 )
 
-type QueueInterface interface {
+type Interface interface {
 	Enqueue(item any)
 	Dequeue() any
 	Peek() any

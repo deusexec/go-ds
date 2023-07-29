@@ -6,7 +6,7 @@ var (
 	ErrorStackIsEmpty = errors.New("Stack is empty")
 )
 
-type StackInterface interface {
+type Interface interface {
 	Push(item any)
 	Pop() any
 	Peek() any
