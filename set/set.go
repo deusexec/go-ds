@@ -3,7 +3,7 @@ package set
 type Interface interface {
 	Add(...any)
 	Sub(...any)
-	Xor(...any)
+	Xor(*set) *set
 	Has(any) bool
 	Size() int
 	Delete(any)
@@ -24,15 +24,6 @@ func New(items ...any) *set {
 	return s
 }
 
-// delete this, unnecessary
-func (s *set) Items() []any {
-	items := make([]any, 0, len(s.items))
-	for item := range s.items {
-		items = append(items, item)
-	}
-	return items
-}
-
 func (s *set) Add(items ...any) {
 	for _, item := range items {
 		s.items[item] = true
@@ -40,7 +31,7 @@ func (s *set) Add(items ...any) {
 }
 
 func (s *set) Sub(items ...any) {
-	for item := range items {
+	for _, item := range items {
 		delete(s.items, item)
 	}
 }

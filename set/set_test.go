@@ -1,7 +1,6 @@
 package set
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -19,7 +18,7 @@ var tests_has = []struct {
 func Test_Has(t *testing.T) {
 	set := New(1, 2, 3)
 	for _, test := range tests_has {
-		fmt.Printf("Item: %v, Expected: %v, Received: %v\n", test.item, test.expected, set.Has(test.item))
+		// fmt.Printf("Item: %v, Expected: %v, Received: %v\n", test.item, test.expected, set.Has(test.item))
 		if set.Has(test.item) != test.expected {
 			t.Errorf("Unexpected result. Expected: %v, Received: %v\n", test.expected, set.Has(test.item))
 		}
@@ -28,7 +27,7 @@ func Test_Has(t *testing.T) {
 
 func Test_Size(t *testing.T) {
 	set := New(1, 2, 3)
-	fmt.Printf("Expected: %v, Received: %v\n", 3, set.Size())
+	// fmt.Printf("Expected: %v, Received: %v\n", 3, set.Size())
 	if set.Size() != 3 {
 		t.Errorf("Wrong size. Expected: %v, Received: %v\n", 3, set.Size())
 	}
@@ -36,11 +35,20 @@ func Test_Size(t *testing.T) {
 
 func Test_Delete(t *testing.T) {
 	set := New(1, 2, 3)
-	for i := range set.Items() {
-		set.Delete(i + 1)
-		if set.Has(i + 1) {
-			t.Errorf("Unexpected result: Expected: %v, Received: %v\n", false, set.Has(i+1))
-		}
+
+	set.Delete(2)
+	if set.Has(2) {
+		t.Errorf("Unexpected result: Expected: %v, Received: %v\n", false, set.Has(2))
+	}
+
+	set.Delete(3)
+	if set.Has(3) {
+		t.Errorf("Unexpected result: Expected: %v, Received: %v\n", false, set.Has(3))
+	}
+
+	set.Delete(1)
+	if set.Has(1) {
+		t.Errorf("Unexpected result: Expected: %v, Received: %v\n", false, set.Has(1))
 	}
 }
 
@@ -57,17 +65,29 @@ func Test_Xor(t *testing.T) {
 	set2 := New(1, 2, 3, 7, 8, 9)
 	set3 := set1.Xor(set2)
 
-	fmt.Println(set3)
+	// fmt.Println(set3)
 
 	if set3.Size() != 3 {
 		t.Errorf("Unexpected result: Expected: %v, Received: %v\n", 3, set3.Size())
 	}
 
 	for _, item := range []int{6, 7, 8} {
-		fmt.Printf("Expected: %v, Received: %v\n", true, set3.Has(item))
+		// fmt.Printf("Expected: %v, Received: %v\n", true, set3.Has(item))
 		if !set3.Has(item) {
 			t.Errorf("Unexpected result: Expected: %v, Received: %v\n", true, set3.Has(item))
 		}
+	}
+}
+
+func Test_Sub(t *testing.T) {
+	set := New(1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+	set.Sub(2, 4, 6, 8)
+
+	// fmt.Println(set)
+
+	if set.Size() != 5 {
+		t.Errorf("Unexpected result: Expected: %v, Received: %v\n", 5, set.Size())
 	}
 }
 

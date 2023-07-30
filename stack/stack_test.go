@@ -2,7 +2,7 @@ package stack
 
 import "testing"
 
-func TestStackPush(t *testing.T) {
+func Test_Push(t *testing.T) {
 	var stack Stack
 	stack.Push(1)
 	if stack.Length() != 1 {
@@ -10,7 +10,7 @@ func TestStackPush(t *testing.T) {
 	}
 }
 
-func TestStackPop(t *testing.T) {
+func Test_Pop(t *testing.T) {
 	var stack Stack
 	n := 1
 	stack.Push(n)
@@ -20,7 +20,7 @@ func TestStackPop(t *testing.T) {
 	}
 }
 
-func TestStackPeek(t *testing.T) {
+func Test_Peek(t *testing.T) {
 	var stack Stack
 	n := 1
 	stack.Push(n)
@@ -29,7 +29,7 @@ func TestStackPeek(t *testing.T) {
 	}
 }
 
-func TestStackIsEmpty(t *testing.T) {
+func Test_IsEmpty(t *testing.T) {
 	var stack Stack
 	if stack.IsEmpty() != true {
 		t.Error("Stack should be empty")
@@ -40,7 +40,7 @@ func TestStackIsEmpty(t *testing.T) {
 	}
 }
 
-func TestStackLength(t *testing.T) {
+func Test_Length(t *testing.T) {
 	var stack Stack
 	if stack.Length() != 0 {
 		t.Error("Length should be equals 0")

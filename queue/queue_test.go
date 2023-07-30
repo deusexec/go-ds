@@ -2,7 +2,7 @@ package queue
 
 import "testing"
 
-func TestEnqueue(t *testing.T) {
+func Test_Enqueue(t *testing.T) {
 	var queue Queue
 	n := 1
 	queue.Enqueue(n)
@@ -11,7 +11,7 @@ func TestEnqueue(t *testing.T) {
 	}
 }
 
-func TestDequeue(t *testing.T) {
+func Test_Dequeue(t *testing.T) {
 	var queue Queue
 	n := 1
 	queue.Enqueue(n)
@@ -24,7 +24,7 @@ func TestDequeue(t *testing.T) {
 	}
 }
 
-func TestPeek(t *testing.T) {
+func Test_Peek(t *testing.T) {
 	var queue Queue
 	n := 1
 	queue.Enqueue(n)
@@ -33,7 +33,7 @@ func TestPeek(t *testing.T) {
 	}
 }
 
-func TestIsEmpty(t *testing.T) {
+func Test_IsEmpty(t *testing.T) {
 	var queue Queue
 	if queue.IsEmpty() != true {
 		t.Error("Queue should be empty")
@@ -44,7 +44,7 @@ func TestIsEmpty(t *testing.T) {
 	}
 }
 
-func TestLength(t *testing.T) {
+func Test_Length(t *testing.T) {
 	var queue Queue
 	if queue.Length() != 0 {
 		t.Error("Queue length should be equals 0")
