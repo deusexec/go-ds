@@ -57,12 +57,12 @@ func printPostOrder(node *node) {
 	fmt.Printf("%c ", node.value)
 }
 
-func printBFS(tree *node) {
+func printBFS(root *node) {
 	queue := queue.New()
 	var temp *node
 
-	if tree != nil {
-		queue.Enqueue(tree)
+	if root != nil {
+		queue.Enqueue(root)
 	}
 
 	for !queue.IsEmpty() {
@@ -80,12 +80,12 @@ func printBFS(tree *node) {
 	}
 }
 
-func printDFS(tree *node) {
+func printDFS(root *node) {
 	stack := stack.New()
 	var temp *node
 
-	if tree != nil {
-		stack.Push(tree)
+	if root != nil {
+		stack.Push(root)
 	}
 
 	for !stack.IsEmpty() {
