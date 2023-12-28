@@ -3,7 +3,7 @@ package queue
 import "errors"
 
 var (
-	ErrorQueueIsEmpty = errors.New("Queue is empty")
+	ErrorQueueIsEmpty = errors.New("queue is empty")
 )
 
 type Interface interface {
@@ -14,15 +14,19 @@ type Interface interface {
 	IsEmpty() bool
 }
 
-type Queue struct {
+type queue struct {
 	items []any
 }
 
-func (q *Queue) Enqueue(item any) {
+func New() *queue {
+	return new(queue)
+}
+
+func (q *queue) Enqueue(item any) {
 	q.items = append(q.items, item)
 }
 
-func (q *Queue) Dequeue() any {
+func (q *queue) Dequeue() any {
 	if q.IsEmpty() {
 		panic(ErrorQueueIsEmpty)
 	}
@@ -31,17 +35,17 @@ func (q *Queue) Dequeue() any {
 	return item
 }
 
-func (q *Queue) Peek() any {
+func (q *queue) Peek() any {
 	if q.IsEmpty() {
 		panic(ErrorQueueIsEmpty)
 	}
 	return q.items[0]
 }
 
-func (q *Queue) Length() int {
+func (q *queue) Length() int {
 	return len(q.items)
 }
 
-func (q *Queue) IsEmpty() bool {
+func (q *queue) IsEmpty() bool {
 	return len(q.items) == 0
 }

@@ -3,7 +3,7 @@ package stack
 import "testing"
 
 func Test_Push(t *testing.T) {
-	var stack Stack
+	stack := New()
 	stack.Push(1)
 	if stack.Length() != 1 {
 		t.Error("Stack should contain 1 element")
@@ -11,7 +11,7 @@ func Test_Push(t *testing.T) {
 }
 
 func Test_Pop(t *testing.T) {
-	var stack Stack
+	stack := New()
 	n := 1
 	stack.Push(n)
 	item := stack.Pop()
@@ -21,7 +21,7 @@ func Test_Pop(t *testing.T) {
 }
 
 func Test_Peek(t *testing.T) {
-	var stack Stack
+	stack := New()
 	n := 1
 	stack.Push(n)
 	if stack.Peek() != n {
@@ -30,7 +30,7 @@ func Test_Peek(t *testing.T) {
 }
 
 func Test_IsEmpty(t *testing.T) {
-	var stack Stack
+	stack := New()
 	if stack.IsEmpty() != true {
 		t.Error("Stack should be empty")
 	}
@@ -41,7 +41,7 @@ func Test_IsEmpty(t *testing.T) {
 }
 
 func Test_Length(t *testing.T) {
-	var stack Stack
+	stack := New()
 	if stack.Length() != 0 {
 		t.Error("Length should be equals 0")
 	}

@@ -3,7 +3,7 @@ package stack
 import "errors"
 
 var (
-	ErrorStackIsEmpty = errors.New("Stack is empty")
+	ErrorStackIsEmpty = errors.New("stack is empty")
 )
 
 type Interface interface {
@@ -14,15 +14,19 @@ type Interface interface {
 	IsEmpty() bool
 }
 
-type Stack struct {
+type stack struct {
 	items []any
 }
 
-func (s *Stack) Push(item any) {
+func New() *stack {
+	return new(stack)
+}
+
+func (s *stack) Push(item any) {
 	s.items = append(s.items, item)
 }
 
-func (s *Stack) Pop() any {
+func (s *stack) Pop() any {
 	if s.IsEmpty() {
 		panic(ErrorStackIsEmpty)
 	}
@@ -32,17 +36,17 @@ func (s *Stack) Pop() any {
 	return item
 }
 
-func (s *Stack) Peek() any {
+func (s *stack) Peek() any {
 	if s.IsEmpty() {
 		panic(ErrorStackIsEmpty)
 	}
 	return s.items[len(s.items)-1]
 }
 
-func (s *Stack) Length() int {
+func (s *stack) Length() int {
 	return len(s.items)
 }
 
-func (s *Stack) IsEmpty() bool {
+func (s *stack) IsEmpty() bool {
 	return len(s.items) == 0
 }
