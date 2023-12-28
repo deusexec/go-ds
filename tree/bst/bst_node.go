@@ -1,5 +1,7 @@
 package bst
 
+import "fmt"
+
 type BstNodeInterface interface {
 	Left() *node
 	Right() *node
@@ -22,4 +24,8 @@ func (n *node) Right() *node {
 
 func (n *node) Value() BstValue {
 	return n.value
+}
+
+func (n *node) String() string {
+	return fmt.Sprintf("%c ", n.value)
 }
