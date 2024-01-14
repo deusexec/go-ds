@@ -2,21 +2,20 @@ package graph
 
 import (
 	"cmp"
-	"fmt"
 
 	"github.com/deusexec/go-ds/queue"
 	"github.com/deusexec/go-ds/stack"
 )
 
-type TraversalType int
-type TraversalCallback[K cmp.Ordered, T any] func(node *Node[K, T])
+type traversalType int
+type traversalFunction[K cmp.Ordered, T any] func(node *Node[K, T])
 
 const (
-	BFS TraversalType = iota
+	BFS traversalType = iota
 	DFS
 )
 
-func (g *graph[K, T]) Traversal(t TraversalType, start *Node[K, T], callback TraversalCallback[K, T]) {
+func (g *graph[K, T]) Traversal(t traversalType, start *Node[K, T], callback traversalFunction[K, T]) {
 	switch t {
 	case BFS:
 		g.bfs(start, callback)
@@ -27,7 +26,7 @@ func (g *graph[K, T]) Traversal(t TraversalType, start *Node[K, T], callback Tra
 	}
 }
 
-func (g *graph[K, T]) bfs(start *Node[K, T], callback TraversalCallback[K, T]) {
+func (g *graph[K, T]) bfs(start *Node[K, T], callback traversalFunction[K, T]) {
 	queue := queue.New()
 	visited := make(map[*Node[K, T]]bool, len(g.nodes))
 
@@ -46,11 +45,9 @@ func (g *graph[K, T]) bfs(start *Node[K, T], callback TraversalCallback[K, T]) {
 			}
 		}
 	}
-
-	fmt.Println()
 }
 
-func (g *graph[K, T]) dfs(start *Node[K, T], callback TraversalCallback[K, T]) {
+func (g *graph[K, T]) dfs(start *Node[K, T], callback traversalFunction[K, T]) {
 	stack := stack.New()
 	visited := make(map[*Node[K, T]]bool, len(g.nodes))
 
@@ -69,6 +66,4 @@ func (g *graph[K, T]) dfs(start *Node[K, T], callback TraversalCallback[K, T]) {
 			}
 		}
 	}
-
-	fmt.Println()
 }
