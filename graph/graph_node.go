@@ -1,6 +1,9 @@
 package graph
 
-import "cmp"
+import (
+	"cmp"
+	"fmt"
+)
 
 type Node[K cmp.Ordered, T any] struct {
 	key  K
@@ -22,4 +25,8 @@ func (n *Node[K, T]) Data() T {
 
 func (n *Node[K, T]) Next() *Node[K, T] {
 	return n.next
+}
+
+func (n *Node[K, T]) String() string {
+	return fmt.Sprintf("[%v] ", n.key)
 }
