@@ -5,7 +5,7 @@ import (
 	"slices"
 )
 
-func (g *graph[K, T]) getSortedNodes() []K {
+func (g *graph[K, T]) sortedNodes() []K {
 	keys := []K{}
 	for k := range g.nodes {
 		keys = append(keys, k)
@@ -19,7 +19,7 @@ func (g *graph[K, T]) Dump() {
 	fmt.Println("==   Graph   ==")
 	fmt.Println("===============")
 
-	for _, key := range g.getSortedNodes() {
+	for _, key := range g.sortedNodes() {
 		edges := g.nodes[key]
 		fmt.Printf("Node: [%v] Edges: ", key)
 		if len(edges) == 0 {
