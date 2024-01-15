@@ -28,5 +28,5 @@ func (n *Node[K, T]) Next() *Node[K, T] {
 }
 
 func (n *Node[K, T]) String() string {
-	return fmt.Sprintf("[%v] ", n.key)
+	return fmt.Sprintf("Node [%v] => { %v }", n.key, n.data)
 }

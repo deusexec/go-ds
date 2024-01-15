@@ -24,14 +24,14 @@ func (g *graph[K, T]) Traversal(t traversalType, start *Node[K, T], callback fun
 }
 
 func (g *graph[K, T]) bfs(start *Node[K, T], callback func(node *Node[K, T])) {
-	queue := queue.New()
+	queue := queue.New[*Node[K, T]]()
 	visited := make(map[*Node[K, T]]bool, len(g.nodes))
 
 	visited[start] = true
 	queue.Enqueue(start)
 
 	for !queue.IsEmpty() {
-		node := queue.Dequeue().(*Node[K, T])
+		node := queue.Dequeue()
 		callback(node)
 
 		edges := g.nodes[node.key]
@@ -45,14 +45,14 @@ func (g *graph[K, T]) bfs(start *Node[K, T], callback func(node *Node[K, T])) {
 }
 
 func (g *graph[K, T]) dfs(start *Node[K, T], callback func(node *Node[K, T])) {
-	stack := stack.New()
+	stack := stack.New[*Node[K, T]]()
 	visited := make(map[*Node[K, T]]bool, len(g.nodes))
 
 	visited[start] = true
 	stack.Push(start)
 
 	for !stack.IsEmpty() {
-		node := stack.Pop().(*Node[K, T])
+		node := stack.Pop()
 		callback(node)
 
 		edges := g.nodes[node.key]

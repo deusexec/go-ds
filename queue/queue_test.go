@@ -3,7 +3,7 @@ package queue
 import "testing"
 
 func Test_Enqueue(t *testing.T) {
-	queue := New()
+	queue := New[int]()
 	n := 1
 	queue.Enqueue(n)
 	if queue.Length() != 1 {
@@ -12,7 +12,7 @@ func Test_Enqueue(t *testing.T) {
 }
 
 func Test_Dequeue(t *testing.T) {
-	queue := New()
+	queue := New[int]()
 	n := 1
 	queue.Enqueue(n)
 	item := queue.Dequeue()
@@ -25,7 +25,7 @@ func Test_Dequeue(t *testing.T) {
 }
 
 func Test_Peek(t *testing.T) {
-	queue := New()
+	queue := New[int]()
 	n := 1
 	queue.Enqueue(n)
 	if queue.Peek() != n {
@@ -34,7 +34,7 @@ func Test_Peek(t *testing.T) {
 }
 
 func Test_IsEmpty(t *testing.T) {
-	queue := New()
+	queue := New[int]()
 	if queue.IsEmpty() != true {
 		t.Error("Queue should be empty")
 	}
@@ -45,7 +45,7 @@ func Test_IsEmpty(t *testing.T) {
 }
 
 func Test_Length(t *testing.T) {
-	queue := New()
+	queue := New[int]()
 	if queue.Length() != 0 {
 		t.Error("Queue length should be equals 0")
 	}

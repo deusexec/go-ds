@@ -3,49 +3,41 @@ package queue
 import "errors"
 
 var (
-	ErrorQueueIsEmpty = errors.New("queue is empty")
+	errorQueueIsEmpty = errors.New("queue is empty")
 )
 
-type Interface interface {
-	Enqueue(item any)
-	Dequeue() any
-	Peek() any
-	Length() int
-	IsEmpty() bool
+type queue[T any] struct {
+	items []T
 }
 
-type queue struct {
-	items []any
+func New[T any]() *queue[T] {
+	return new(queue[T])
 }
 
-func New() *queue {
-	return new(queue)
-}
-
-func (q *queue) Enqueue(item any) {
+func (q *queue[T]) Enqueue(item T) {
 	q.items = append(q.items, item)
 }
 
-func (q *queue) Dequeue() any {
+func (q *queue[T]) Dequeue() T {
 	if q.IsEmpty() {
-		panic(ErrorQueueIsEmpty)
+		panic(errorQueueIsEmpty)
 	}
 	item := q.items[0]
 	q.items = q.items[1:]
 	return item
 }
 
-func (q *queue) Peek() any {
+func (q *queue[T]) Peek() T {
 	if q.IsEmpty() {
-		panic(ErrorQueueIsEmpty)
+		panic(errorQueueIsEmpty)
 	}
 	return q.items[0]
 }
 
-func (q *queue) Length() int {
+func (q *queue[T]) Length() int {
 	return len(q.items)
 }
 
-func (q *queue) IsEmpty() bool {
+func (q *queue[T]) IsEmpty() bool {
 	return len(q.items) == 0
 }
