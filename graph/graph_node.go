@@ -12,7 +12,10 @@ type Node[K cmp.Ordered, T any] struct {
 }
 
 func NewNode[K cmp.Ordered, T any](key K, data T) *Node[K, T] {
-	return &Node[K, T]{key, data, nil}
+	return &Node[K, T]{
+		key:  key,
+		data: data,
+	}
 }
 
 func (n *Node[K, T]) Key() K {
