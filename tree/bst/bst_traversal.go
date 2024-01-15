@@ -1,72 +1,74 @@
 package bst
 
 import (
-	"fmt"
+	"cmp"
 
 	"github.com/deusexec/go-ds/queue"
 	"github.com/deusexec/go-ds/stack"
 )
 
+type traversalOrder uint
+
 const (
-	PREORDER = iota
+	PREORDER traversalOrder = iota
 	INORDER
 	POSTORDER
 	BFS
 	DFS
 )
 
-func Traversal(order uint8, node *node) {
+func Traversal[T cmp.Ordered](order traversalOrder, node *Node[T], callback func(node *Node[T])) {
 	switch order {
 	case PREORDER:
-		printPreOrder(node)
+		preorder(node, callback)
 	case INORDER:
-		printInOrder(node)
+		inorder(node, callback)
 	case POSTORDER:
-		printPostOrder(node)
+		postorder(node, callback)
 	case BFS:
-		printBFS(node)
+		bfs(node, callback)
 	case DFS:
-		printDFS(node)
+		dfs(node, callback)
 	}
 }
 
-func printPreOrder(node *node) {
+func preorder[T cmp.Ordered](node *Node[T], callback func(node *Node[T])) {
 	if node == nil {
 		return
 	}
-	fmt.Printf("%c ", node.value)
-	printPreOrder(node.left)
-	printPreOrder(node.right)
+	callback(node)
+	preorder(node.left, callback)
+	preorder(node.right, callback)
 }
 
-func printInOrder(node *node) {
+func inorder[T cmp.Ordered](node *Node[T], callback func(node *Node[T])) {
 	if node == nil {
 		return
 	}
-	printInOrder(node.left)
-	fmt.Printf("%c ", node.value)
-	printInOrder(node.right)
+	inorder(node.left, callback)
+	callback(node)
+	inorder(node.right, callback)
 }
 
-func printPostOrder(node *node) {
+func postorder[T cmp.Ordered](node *Node[T], callback func(node *Node[T])) {
 	if node == nil {
 		return
 	}
-	printPostOrder(node.left)
-	printPostOrder(node.right)
-	fmt.Printf("%c ", node.value)
+	postorder(node.left, callback)
+	postorder(node.right, callback)
+	callback(node)
 }
 
-func printBFS(start *node) {
+func bfs[T cmp.Ordered](start *Node[T], callback func(node *Node[T])) {
 	if start == nil {
 		return
 	}
-	queue := queue.New[*node]()
+	queue := queue.New[*Node[T]]()
 	queue.Enqueue(start)
 
 	for !queue.IsEmpty() {
 		n := queue.Dequeue()
-		fmt.Print(n, " ")
+		callback(n)
 
 		if n.left != nil {
 			queue.Enqueue(n.left)
@@ -77,16 +79,16 @@ func printBFS(start *node) {
 	}
 }
 
-func printDFS(start *node) {
+func dfs[T cmp.Ordered](start *Node[T], callback func(node *Node[T])) {
 	if start == nil {
 		return
 	}
-	stack := stack.New[*node]()
+	stack := stack.New[*Node[T]]()
 	stack.Push(start)
 
 	for !stack.IsEmpty() {
 		n := stack.Pop()
-		fmt.Print(n, " ")
+		callback(n)
 
 		if n.right != nil {
 			stack.Push(n.right)

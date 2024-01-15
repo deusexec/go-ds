@@ -1,31 +1,28 @@
 package bst
 
-import "fmt"
+import (
+	"cmp"
+	"fmt"
+)
 
-type BstNodeInterface interface {
-	Left() *node
-	Right() *node
-	Value() BstValue
+type Node[T cmp.Ordered] struct {
+	data  T
+	left  *Node[T]
+	right *Node[T]
 }
 
-type node struct {
-	value BstValue
-	left  *node
-	right *node
-}
-
-func (n *node) Left() *node {
+func (n *Node[T]) Left() *Node[T] {
 	return n.left
 }
 
-func (n *node) Right() *node {
+func (n *Node[T]) Right() *Node[T] {
 	return n.right
 }
 
-func (n *node) Value() BstValue {
-	return n.value
+func (n *Node[T]) Data() T {
+	return n.data
 }
 
-func (n *node) String() string {
-	return fmt.Sprintf("%c ", n.value)
+func (n *Node[T]) String() string {
+	return fmt.Sprintf("{ %v }", n.data)
 }

@@ -5,15 +5,15 @@ import (
 	"github.com/deusexec/go-ds/stack"
 )
 
-type traversalType int
+type traversalOrder uint
 
 const (
-	BFS traversalType = iota
+	BFS traversalOrder = iota
 	DFS
 )
 
-func (g *graph[K, T]) Traversal(t traversalType, start *Node[K, T], callback func(node *Node[K, T])) {
-	switch t {
+func (g *graph[K, T]) Traversal(order traversalOrder, start *Node[K, T], callback func(node *Node[K, T])) {
+	switch order {
 	case BFS:
 		g.bfs(start, callback)
 	case DFS:
