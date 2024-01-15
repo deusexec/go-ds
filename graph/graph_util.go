@@ -5,6 +5,19 @@ import (
 	"slices"
 )
 
+func (g *graph[K, T]) findEdge(src, dst *Node[K, T]) int {
+	edges, ok := g.nodes[src.key]
+	if !ok {
+		return -1
+	}
+	for i, e := range edges {
+		if e.key == dst.key {
+			return i
+		}
+	}
+	return -1
+}
+
 func (g *graph[K, T]) sortedNodes() []K {
 	keys := []K{}
 	for k := range g.nodes {
