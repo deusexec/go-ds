@@ -57,48 +57,42 @@ func printPostOrder(node *node) {
 	fmt.Printf("%c ", node.value)
 }
 
-func printBFS(root *node) {
-	queue := queue.New()
-	var temp *node
-
-	if root != nil {
-		queue.Enqueue(root)
+func printBFS(start *node) {
+	if start == nil {
+		return
 	}
+	queue := queue.New[*node]()
+	queue.Enqueue(start)
 
 	for !queue.IsEmpty() {
-		item := queue.Dequeue()
-		temp = item.(*node)
+		n := queue.Dequeue()
+		fmt.Print(n, " ")
 
-		fmt.Print(temp, " ")
-
-		if temp.left != nil {
-			queue.Enqueue(temp.left)
+		if n.left != nil {
+			queue.Enqueue(n.left)
 		}
-		if temp.right != nil {
-			queue.Enqueue(temp.right)
+		if n.right != nil {
+			queue.Enqueue(n.right)
 		}
 	}
 }
 
-func printDFS(root *node) {
-	stack := stack.New()
-	var temp *node
-
-	if root != nil {
-		stack.Push(root)
+func printDFS(start *node) {
+	if start == nil {
+		return
 	}
+	stack := stack.New[*node]()
+	stack.Push(start)
 
 	for !stack.IsEmpty() {
-		item := stack.Pop()
-		temp = item.(*node)
+		n := stack.Pop()
+		fmt.Print(n, " ")
 
-		fmt.Print(temp, " ")
-
-		if temp.right != nil {
-			stack.Push(temp.right)
+		if n.right != nil {
+			stack.Push(n.right)
 		}
-		if temp.left != nil {
-			stack.Push(temp.left)
+		if n.left != nil {
+			stack.Push(n.left)
 		}
 	}
 }
