@@ -17,7 +17,7 @@ const (
 	DFS
 )
 
-func Traversal[T cmp.Ordered](order traversalOrder, node *Node[T], callback func(node *Node[T])) {
+func Traversal[K cmp.Ordered, T any](order traversalOrder, node *Node[K, T], callback func(node *Node[K, T])) {
 	switch order {
 	case PREORDER:
 		preorder(node, callback)
@@ -32,7 +32,7 @@ func Traversal[T cmp.Ordered](order traversalOrder, node *Node[T], callback func
 	}
 }
 
-func preorder[T cmp.Ordered](node *Node[T], callback func(node *Node[T])) {
+func preorder[K cmp.Ordered, T any](node *Node[K, T], callback func(node *Node[K, T])) {
 	if node == nil {
 		return
 	}
@@ -41,7 +41,7 @@ func preorder[T cmp.Ordered](node *Node[T], callback func(node *Node[T])) {
 	preorder(node.right, callback)
 }
 
-func inorder[T cmp.Ordered](node *Node[T], callback func(node *Node[T])) {
+func inorder[K cmp.Ordered, T any](node *Node[K, T], callback func(node *Node[K, T])) {
 	if node == nil {
 		return
 	}
@@ -50,7 +50,7 @@ func inorder[T cmp.Ordered](node *Node[T], callback func(node *Node[T])) {
 	inorder(node.right, callback)
 }
 
-func postorder[T cmp.Ordered](node *Node[T], callback func(node *Node[T])) {
+func postorder[K cmp.Ordered, T any](node *Node[K, T], callback func(node *Node[K, T])) {
 	if node == nil {
 		return
 	}
@@ -59,11 +59,11 @@ func postorder[T cmp.Ordered](node *Node[T], callback func(node *Node[T])) {
 	callback(node)
 }
 
-func bfs[T cmp.Ordered](start *Node[T], callback func(node *Node[T])) {
+func bfs[K cmp.Ordered, T any](start *Node[K, T], callback func(node *Node[K, T])) {
 	if start == nil {
 		return
 	}
-	queue := queue.New[*Node[T]]()
+	queue := queue.New[*Node[K, T]]()
 	queue.Enqueue(start)
 
 	for !queue.IsEmpty() {
@@ -79,11 +79,11 @@ func bfs[T cmp.Ordered](start *Node[T], callback func(node *Node[T])) {
 	}
 }
 
-func dfs[T cmp.Ordered](start *Node[T], callback func(node *Node[T])) {
+func dfs[K cmp.Ordered, T any](start *Node[K, T], callback func(node *Node[K, T])) {
 	if start == nil {
 		return
 	}
-	stack := stack.New[*Node[T]]()
+	stack := stack.New[*Node[K, T]]()
 	stack.Push(start)
 
 	for !stack.IsEmpty() {

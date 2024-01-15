@@ -2,30 +2,31 @@ package bst
 
 import "cmp"
 
-func New[T cmp.Ordered](data T) *Node[T] {
-	return &Node[T]{
+func New[K cmp.Ordered, T any](key K, data T) *Node[K, T] {
+	return &Node[K, T]{
+		key:  key,
 		data: data,
 	}
 }
 
-func Search[T cmp.Ordered](node *Node[T], data T) *Node[T] {
-	if node == nil {
+func Search[K cmp.Ordered, T any](src, dst *Node[K, T]) *Node[K, T] {
+	if src == nil {
 		return nil
-	} else if data < node.data {
-		return Search(node.left, data)
-	} else if data > node.data {
-		return Search(node.right, data)
+	} else if dst.key < src.key {
+		return Search(src.left, dst)
+	} else if dst.key > src.key {
+		return Search(src.right, dst)
 	}
-	return node
+	return src
 }
 
-func Insert[T cmp.Ordered](node *Node[T], data T) *Node[T] {
-	if node == nil {
-		return New(data)
-	} else if data < node.data {
-		node.left = Insert(node.left, data)
-	} else if data > node.data {
-		node.right = Insert(node.right, data)
+func Insert[K cmp.Ordered, T any](src, dst *Node[K, T]) *Node[K, T] {
+	if src == nil {
+		return New(dst.key, dst.data)
+	} else if dst.key < src.key {
+		src.left = Insert(src.left, dst)
+	} else if dst.key > src.key {
+		src.right = Insert(src.right, dst)
 	}
-	return node
+	return src
 }
