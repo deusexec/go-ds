@@ -81,3 +81,10 @@ BFS: [D] [A] [B] [C] [F] [E]
 DFS: [A] [D] [C] [F] [E] [B] 
 DFS: [D] [A] [C] [F] [E] [B] 
 ```
+
+## Tests
+
+```text
+make        # run tests
+make testv  # run tests with verbose
+```
