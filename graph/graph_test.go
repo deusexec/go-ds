@@ -5,14 +5,11 @@ import "testing"
 func Test_NewGraph(t *testing.T) {
 	g := NewGraph[int, string]()
 
-	if g.nodesCount != 0 {
+	if g.NodeCount() != 0 || len(g.nodes) != 0 {
 		t.Error("Node count should be equals 0")
 	}
-	if g.edgesCount != 0 {
+	if g.EdgeCount() != 0 {
 		t.Error("Edge count should be equals 0")
-	}
-	if len(g.nodes) != 0 {
-		t.Error("Node list should be empty")
 	}
 }
 
