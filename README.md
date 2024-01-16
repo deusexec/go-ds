@@ -4,6 +4,10 @@ Useful golang data structures for every day.
 
 ## Graph
 
+```text
+go get github.com/deusexec/go-ds/graph
+```
+
 ```go
 package main
 
